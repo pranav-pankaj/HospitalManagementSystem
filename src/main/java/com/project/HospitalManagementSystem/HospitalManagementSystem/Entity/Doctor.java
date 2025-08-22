@@ -23,6 +23,6 @@ public class Doctor {
     private String specialization;
     @Column(nullable = false,unique = true)
     private String email;
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor",cascade = {CascadeType.ALL},orphanRemoval = true)
     private List<Appointment> appointmentList;
 }

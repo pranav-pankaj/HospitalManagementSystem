@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,14 +28,14 @@ public class Patient {
     private Gender gender;
     @Column(nullable = false,unique = true)
     private String email;
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
     @Enumerated(EnumType.STRING)
     private BloodGroup bloodGroup;
     @CreationTimestamp
     private LocalDateTime createdAt;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL},orphanRemoval = true)
     @JoinColumn(name = "patient_insurance_id")//owning side
     private Insurance insurance;
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient",cascade={CascadeType.REMOVE},orphanRemoval = true)
     private List<Appointment> appointments;
 }

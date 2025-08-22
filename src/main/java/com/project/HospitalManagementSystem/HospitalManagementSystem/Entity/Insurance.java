@@ -21,7 +21,6 @@ public class Insurance {
     private String policyNbr;
     @Column(nullable = false,length = 100)
     private String insuranceProvider;
-    @Column(nullable = false)
     private LocalDateTime validUntill;
     private LocalDateTime createdAt;
     @OneToOne(mappedBy = "insurance")
